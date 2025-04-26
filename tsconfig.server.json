@@ -3,13 +3,24 @@
   "compilerOptions": {
     "outDir": "./dist/server",
     "rootDir": "./server",
-    "module": "CommonJS",
+    "module": "Node16",
     "target": "ES2020",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "resolveJsonModule": true,
-    "types": ["node", "express", "cors"]
+    "types": [  
+      "node",
+      "express",
+      "cors"
+    ]
   },
-  "include": ["server/**/*"],
-  "exclude": ["dist", "src", "postcss.config.js", "tailwind.config.js"]
+  "include": [
+    "server/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "src",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ]
 }

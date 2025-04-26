@@ -78,7 +78,10 @@ export const appRouter = t.router({
         }
       )
       const text = response.data.choices[0]?.message?.content
-      if (!text) throw new Error('No content from OpenAI')
+      if (!text) {
+        console.error('No content from OpenAI')
+        throw new Error('Something went wrong! Please try again')
+      }
       let parsed: unknown
       try {
         parsed = JSON.parse(text)
