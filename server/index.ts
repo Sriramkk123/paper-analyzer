@@ -27,7 +27,7 @@ app.use((_req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`tRPC server listening on port ${port}`)
 })
