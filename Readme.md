@@ -81,7 +81,7 @@ npm run server
 2. Wait for the app to fetch and analyze the paper.
 3. Browse the structured analysis sections.
 4. Click "View PDF" for the full paper.
-5. Use export options for JSON or PDF.
+5. Use export options for PDF.
 6. Try the Chat page for interactive Q&A (demo).
 
 ---
