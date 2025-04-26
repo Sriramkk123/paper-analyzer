@@ -10,7 +10,7 @@
     "build": "npm run build:backend && npm run build:frontend",
     "preview": "vite preview",
     "server": "tsx server/index.ts",
-    "start": "node dist/server/index.js",
+    "start": "npm run build && node dist/server/index.js",
     "postinstall": "npm run build"
   },
   "dependencies": {
