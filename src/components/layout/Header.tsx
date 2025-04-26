@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 const Header = () => {
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10
@@ -14,14 +14,14 @@ const Header = () => {
         setScrolled(isScrolled)
       }
     }
-    
+
     window.addEventListener('scroll', handleScroll)
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [scrolled])
-  
+
   return (
     <motion.header
       className={`sticky top-0 z-10 transition-colors duration-300 ${scrolled ? 'bg-navy shadow-md' : 'bg-transparent'}`}
@@ -36,31 +36,31 @@ const Header = () => {
               PaperAI
             </span>
           </Link>
-          
+
           <nav className="hidden md:flex space-x-4">
-            <NavLink 
-              to="/" 
-              isActive={location.pathname === '/'} 
+            <NavLink
+              to="/"
+              isActive={location.pathname === '/'}
               scrolled={scrolled}
             >
               Home
             </NavLink>
-            <NavLink 
-              to="/analysis" 
-              isActive={location.pathname === '/analysis'} 
+            <NavLink
+              to="/analysis"
+              isActive={location.pathname === '/analysis'}
               scrolled={scrolled}
             >
               Analysis
             </NavLink>
-            <NavLink 
+            {/* <NavLink 
               to="/chat" 
               isActive={location.pathname === '/chat'} 
               scrolled={scrolled}
             >
               Chat
-            </NavLink>
+            </NavLink> */}
           </nav>
-          
+
           <MobileMenu scrolled={scrolled} />
         </div>
       </div>
@@ -81,7 +81,7 @@ const NavLink = ({ to, isActive, scrolled, children }: NavLinkProps) => {
       to={to}
       className={`
         px-3 py-2 rounded-md font-medium transition-colors
-        ${isActive 
+        ${isActive
           ? 'bg-teal text-white'
           : scrolled
             ? 'text-cream hover:bg-teal/20'
@@ -101,32 +101,32 @@ interface MobileMenuProps {
 const MobileMenu = ({ scrolled }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
-  
+
   return (
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`p-2 rounded-md ${scrolled ? 'text-cream' : 'text-navy'}`}
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          strokeWidth={1.5} 
-          stroke="currentColor" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
           className="w-6 h-6"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            d={isOpen 
-              ? "M6 18L18 6M6 6l12 12" 
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d={isOpen
+              ? "M6 18L18 6M6 6l12 12"
               : "M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-            } 
+            }
           />
         </svg>
       </button>
-      
+
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}

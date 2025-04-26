@@ -17,7 +17,7 @@ export const validateArxivUrl = (url: string): boolean => {
     return (
       urlObj.pathname.includes('/abs/') || 
       urlObj.pathname.includes('/pdf/') ||
-      urlObj.pathname.match(/\/\d{4}\.\d{5}/)
+      !!urlObj.pathname.match(/\/\d{4}\.\d{5}/)
     )
   } catch (error) {
     // Invalid URL format
