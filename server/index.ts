@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(
-  '/trpc',
+  '/api/trpc',
   trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext: () => ({}),
