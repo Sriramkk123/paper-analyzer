@@ -22,8 +22,8 @@ app.use(
 // Serve React static assets
 const distPath = path.join(process.cwd(), 'dist')
 app.use(express.static(distPath))
-// Fallback only for GET (SPA routing)
-app.get('*', (_req, res) => {
+// Only fallback for GET requests not starting with /trpc
+app.get(/^\/(?!trpc).*/, (_req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
