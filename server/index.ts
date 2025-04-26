@@ -3,6 +3,7 @@ import * as trpcExpress from '@trpc/server/adapters/express'
 import dotenv from 'dotenv'
 import { appRouter } from './trpc.js'
 import cors from 'cors'
+import path from 'path'
 
 dotenv.config()
 
@@ -17,6 +18,14 @@ app.use(
     createContext: () => ({}),
   })
 )
+
+// Serve React static assets
+const distPath = path.join(process.cwd(), 'dist')
+app.use(express.static(distPath))
+// Fallback to index.html for SPA routing
+app.use((_req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'))
+})
 
 const port = process.env.PORT || 4000
 app.listen(port, () => {
