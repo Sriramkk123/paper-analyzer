@@ -10,7 +10,7 @@ const DatasetSetup = ({ datasetSetup }: DatasetSetupProps) => (
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-xl font-serif font-semibold text-navy">Dataset & Experimental Setup</h3>
       <div className="flex items-center space-x-1 text-xs">
-        <span className="w-3 h-3 bg-teal-400 rounded-full"></span>
+        <span className="w-3 h-3 bg-green-400 rounded-full"></span>
         <span className="text-gray-600">Setup</span>
       </div>
     </div>
@@ -29,7 +29,7 @@ const DatasetSetup = ({ datasetSetup }: DatasetSetupProps) => (
             transition={{ delay: 0.1 * (idx + 1) }}
             className="flex items-start"
           >
-            <span className="w-1.5 h-1.5 bg-teal-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+            <span className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
             <span className="text-gray-700">{item}</span>
           </motion.li>
         ))}

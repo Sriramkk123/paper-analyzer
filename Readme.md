@@ -70,7 +70,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### 5. Start the Server (API/backend)
 ```bash
-npm run start:server
+npm run server
 ```
 
 ---
