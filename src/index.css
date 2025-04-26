@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F5EEDD;
+  --color-mint: #7AE2CF;
+  --color-teal: #077A7D;
+  --color-navy: #06202B;
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-cream);
+  color: var(--color-navy);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.paper-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Chat bubble styles */
+.chat-bubble {
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  max-width: 80%;
+}
+
+.chat-bubble.user {
+  background-color: var(--color-mint);
+  color: var(--color-navy);
+  margin-left: auto;
+  border-bottom-right-radius: 0;
+}
+
+.chat-bubble.bot {
+  background-color: var(--color-teal);
+  color: white;
+  margin-right: auto;
+  border-bottom-left-radius: 0;
+}
+
+/* Math notation styling */
+.math-notation {
+  overflow-x: auto;
+  padding: 0.5rem;
+  background-color: rgba(245, 238, 221, 0.5);
+  border-radius: 0.25rem;
+}
