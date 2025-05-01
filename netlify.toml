@@ -1,6 +1,7 @@
 [build]
-  command = "vite build"
+  command = "npm run build:frontend"
   publish = "dist"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/trpc/*"

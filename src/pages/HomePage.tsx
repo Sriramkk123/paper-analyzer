@@ -67,7 +67,7 @@ const HomePage = () => {
       </motion.div>
 
       <motion.div
-        className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+        className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5, staggerChildren: 0.1 }}
@@ -87,7 +87,7 @@ const HomePage = () => {
           </p>
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           className="bg-white rounded-lg shadow p-6 paper-card"
           whileHover={{ y: -5 }}
         >
@@ -100,7 +100,7 @@ const HomePage = () => {
           <p className="text-gray-700">
             Ask questions about the paper and get instant answers from the AI assistant.
           </p>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           className="bg-white rounded-lg shadow p-6 paper-card"

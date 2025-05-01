@@ -10,7 +10,9 @@ export const fetchPaperData = async (paperId: string): Promise<PaperData> => {
   const xml = response.data
   const doc = new DOMParser().parseFromString(xml, 'application/xml')
   const entry = doc.getElementsByTagName('entry')[0]
-  if (!entry) throw new Error(`No data found for paper ${paperId}`)
+  if (!entry) {
+    throw new Error(`No data found for paper ${paperId}`)
+  }
   const getText = (tag: string) => entry.getElementsByTagName(tag)[0]?.textContent?.trim() ?? ''
   const authors = Array.from(entry.getElementsByTagName('author')).map(authorEl => ({
     name: authorEl.getElementsByTagName('name')[0]?.textContent?.trim() ?? '',

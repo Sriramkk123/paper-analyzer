@@ -27,7 +27,7 @@ const AnalysisPage = () => {
       navigate('/')
     }
   }, [paperBreakdown, isLoading, error, navigate])
-  
+
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
@@ -36,14 +36,14 @@ const AnalysisPage = () => {
       </div>
     )
   }
-  
+
   if (error) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <div className="bg-red-50 text-red-800 p-6 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Error</h2>
           <p>{error}</p>
-          <button 
+          <button
             onClick={() => navigate('/')}
             className="mt-4 px-6 py-2 bg-navy text-white rounded-md hover:bg-teal transition-colors"
           >
@@ -53,11 +53,11 @@ const AnalysisPage = () => {
       </div>
     )
   }
-  
+
   if (!paperBreakdown) {
     return null // This should never happen due to the redirect, but TypeScript needs it
   }
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -68,7 +68,7 @@ const AnalysisPage = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-serif font-bold text-navy">Paper Analysis</h1>
         <div className="flex space-x-3">
-          <button
+          {/* <button
             onClick={() => navigate('/chat')}
             className="px-4 py-2 bg-mint text-navy rounded-md hover:bg-teal hover:text-white transition-colors flex items-center"
           >
@@ -76,7 +76,7 @@ const AnalysisPage = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
             </svg>
             Ask Questions
-          </button>
+          </button> */}
           <button
             onClick={exportAnalysis}
             className="px-4 py-2 bg-navy text-white rounded-md hover:bg-teal transition-colors flex items-center"
@@ -88,7 +88,7 @@ const AnalysisPage = () => {
           </button>
         </div>
       </div>
-      
+
       <motion.div id="analysis-content"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -103,21 +103,21 @@ const AnalysisPage = () => {
             <div className="text-sm text-gray-500 mb-6">
               Full Paper PDF: <a href={pdfUrl} target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">View PDF</a>
             </div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
               className="mb-10"
             >
-              <PaperOverview 
+              <PaperOverview
                 title={paperBreakdown.title}
                 publicationDate={paperBreakdown.publicationDate}
                 authors={paperBreakdown.authors}
               />
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -125,7 +125,7 @@ const AnalysisPage = () => {
             >
               <AbstractSection abstract={paperBreakdown.abstract} />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -134,7 +134,7 @@ const AnalysisPage = () => {
             >
               <BackgroundSection backgroundRelatedWork={paperBreakdown.backgroundRelatedWork} />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -143,45 +143,45 @@ const AnalysisPage = () => {
             >
               <KeyContributions keyContributions={paperBreakdown.keyContributions} />
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
               className="mb-10"
             >
-              <ProblemStatement 
+              <ProblemStatement
                 challenges={paperBreakdown.problemStatement.challenges}
                 limitations={paperBreakdown.problemStatement.limitations}
               />
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6 }}
               className="mb-10"
             >
-              <ProposedSolution 
+              <ProposedSolution
                 methodologies={paperBreakdown.proposedSolution.methodologies}
                 approaches={paperBreakdown.proposedSolution.approaches}
                 implementation={paperBreakdown.proposedSolution.implementation}
               />
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7 }}
               className="mb-10"
             >
-              <ResultsSection 
+              <ResultsSection
                 metrics={paperBreakdown.results.metrics}
                 comparison={paperBreakdown.results.comparison}
                 achievements={paperBreakdown.results.achievements}
               />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -190,7 +190,7 @@ const AnalysisPage = () => {
             >
               <EvaluationMetrics evaluationMetrics={paperBreakdown.evaluationMetrics} />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -199,7 +199,7 @@ const AnalysisPage = () => {
             >
               <DatasetSetup datasetSetup={paperBreakdown.datasetSetup} />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -207,8 +207,8 @@ const AnalysisPage = () => {
             >
               <DiscussionSection discussionInsightsApplications={paperBreakdown.discussionInsightsApplications} />
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.1 }}
