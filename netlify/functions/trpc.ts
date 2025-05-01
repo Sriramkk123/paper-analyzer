@@ -1,11 +1,21 @@
+import { awsLambdaRequestHandler } from '@trpc/server/adapters/aws-lambda'
 import { appRouter } from '../../server/trpc'
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch'
 
-export default async (req: Request) => {
-  return fetchRequestHandler({
-    endpoint: '/api/trpc',
-    req,
-    router: appRouter,
-    createContext: () => ({}),
-  })
+const trpcHandler = awsLambdaRequestHandler({
+  router: appRouter,
+  createContext: () => ({}),
+})
+
+export const handler = async (event: any, context: any): Promise<any> => {
+  if (!(event as any).requestContext) {
+    (event as any).requestContext = {
+      domainName: event.headers.host || 'localhost',
+      http: {
+        method: event.httpMethod,
+        path: event.path,
+        protocol: 'HTTP/1.1',
+      },
+    }
+  }
+  return trpcHandler(event, context)
 }
