@@ -65,16 +65,19 @@ export const PaperProvider = ({ children }: { children: ReactNode }) => {
 
       // Poll for status
       let statusObj: any
+      let attempts = 0
+      const maxAttempts = 10
       do {
-        await new Promise(r => setTimeout(r, 1000))
+        attempts++
+        await new Promise(r => setTimeout(r, 5000))
         const statusResp = await fetch(`/api/trpc-status?jobId=${jobId}`)
         statusObj = await statusResp.json()
-      } while (statusObj.status === 'processing')
+      } while (statusObj.status === 'processing' && attempts < maxAttempts)
 
       if (statusObj.status === 'done' && statusObj.result) {
-        console.log("Setting paper breakdown")
-        console.log(statusObj.result)
-        setPaperBreakdown({...statusObj.result, title: data.title, publicationDate: data.publicationDate, authors: data.authors, abstract: data.abstract})
+        setPaperBreakdown({ ...statusObj.result, title: data.title, publicationDate: data.publicationDate, authors: data.authors, abstract: data.abstract })
+      } else if (statusObj.status === 'processing') {
+        throw new Error('Analysis timed out after maximum retries.')
       } else {
         throw new Error(statusObj.error || 'Analysis failed')
       }
