@@ -18,7 +18,7 @@ export default async function handler(request: Request) {
       created_at: new Date().toISOString(),
     })
     // Trigger background function asynchronously
-    fetch(`${process.env.URL}/.netlify/functions/trpc-background`, {
+    await fetch(`${process.env.URL}/.netlify/functions/trpc-background`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ jobId, input }),
