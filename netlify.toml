@@ -1,14 +1,25 @@
+[dev]
+  command = "npm run dev"
+  targetPort = 5173
+
 [build]
   command = "npm run build:frontend"
   publish = "dist"
   functions = "netlify/functions"
 
+# Redirect trpc-start and trpc-status to functions
 [[redirects]]
-  from = "/api/trpc/*"
-  to = "/.netlify/functions/trpc"
+  from = "/api/trpc-start"
+  to = "/.netlify/functions/trpc-start"
   status = 200
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/trpc-status"
+  to = "/.netlify/functions/trpc-status"
+  status = 200
+
+# Existing tRPC background redirect
+[[redirects]]
+  from = "/api/trpc/*"
+  to = "/.netlify/functions/trpc-background"
   status = 200

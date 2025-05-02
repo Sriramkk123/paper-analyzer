@@ -52,9 +52,32 @@ export const PaperProvider = ({ children }: { children: ReactNode }) => {
       const data = await fetchPaperData(paperId)
       setPaperData(data)
 
-      // Generate paper breakdown via OpenAI
-      const breakdown = await generateBreakdown(data)
-      setPaperBreakdown(breakdown)
+      // Start background job
+      const startResp = await fetch('/api/trpc-start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!startResp.ok) {
+        throw new Error('Failed to start analysis')
+      }
+      const { jobId } = await startResp.json()
+
+      // Poll for status
+      let statusObj: any
+      do {
+        await new Promise(r => setTimeout(r, 1000))
+        const statusResp = await fetch(`/api/trpc-status?jobId=${jobId}`)
+        statusObj = await statusResp.json()
+      } while (statusObj.status === 'processing')
+
+      if (statusObj.status === 'done' && statusObj.result) {
+        console.log("Setting paper breakdown")
+        console.log(statusObj.result)
+        setPaperBreakdown({...statusObj.result, title: data.title, publicationDate: data.publicationDate, authors: data.authors, abstract: data.abstract})
+      } else {
+        throw new Error(statusObj.error || 'Analysis failed')
+      }
 
       // Initialize chat with a greeting
       setChatMessages([
